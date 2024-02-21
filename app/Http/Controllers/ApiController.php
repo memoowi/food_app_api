@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
-class UserController extends Controller
+class ApiController extends Controller
 {
     public function register(Request $request)
     {
