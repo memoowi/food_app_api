@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Menu extends Model
+class Order extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function outlet(): BelongsTo
+    public function transaction():BelongsTo
     {
-        return $this->belongsTo(Outlet::class);
+        return $this->belongsTo(Transaction::class);
     }
-    public function orders(): HasMany
+
+    public function menu():BelongsTo
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Menu::class);
     }
 }

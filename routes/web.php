@@ -27,3 +27,5 @@ Route::get('/outlet/{id}', [OutletController::class, 'show'])->name('outlets.sho
 Route::get('/outlet/{id}/create/menu', [OutletController::class, 'createMenu'])->name('outlets.createMenu');
 Route::post('/outlet/{id}/create/menu', [OutletController::class, 'storeMenu'])->name('outlets.storeMenu');
 Route::post('/outlet/delete/menu/{id}', [OutletController::class, 'deleteMenu'])->name('outlets.deleteMenu');
+
+Route::post('/outlet/transaction/update/{id}', [OutletController::class, 'updateTransaction'])->name('outlets.updateTransaction');

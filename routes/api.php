@@ -21,8 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [ApiController::class, 'register']);
 Route::post('/login', [ApiController::class, 'login']);
+Route::get('/outlet', [ApiController::class, 'getOutlet']);
+Route::get('/menu', [ApiController::class, 'getMenu']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [ApiController::class, 'logout']);
+    Route::post('/order', [ApiController::class, 'order']);
+    Route::get('/orders', [ApiController::class, 'getOrders']);
+    Route::get('/order', [ApiController::class, 'getOrder']);
 });

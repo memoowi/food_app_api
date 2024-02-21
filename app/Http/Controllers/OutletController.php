@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\Outlet;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class OutletController extends Controller
@@ -56,7 +57,8 @@ class OutletController extends Controller
     {
         $outlet = Outlet::find($id);
         $menus = $outlet->menus;
-        return view('pages.show-outlet', compact('outlet'), compact('menus'));
+        $transactions = $outlet->transactions;
+        return view('pages.show-outlet', compact('outlet', 'menus', 'transactions'));
     }
     public function createMenu($id)
     {
@@ -90,6 +92,16 @@ class OutletController extends Controller
         $deleteFile = public_path($menu->image_url);
         unlink($deleteFile);
         $menu->delete();
+        return redirect()->back();
+    }
+    public function updateTransaction($id)
+    {
+        $transaction = Transaction::find($id);
+        if ($transaction->status == 'waitlist') {
+            $transaction->update(['status' => 'done']);
+        } else if ($transaction->status == 'done') {
+            $transaction->update(['status' => 'paid']);
+        }
         return redirect()->back();
     }
 }
