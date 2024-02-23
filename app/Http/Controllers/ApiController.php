@@ -191,13 +191,13 @@ class ApiController extends Controller
             ], 500);
         }
     }
-    public function getOrders(Request $request)
+    public function getOrders()
     {
         $user = auth()->user();
         $transactions = $user->transactions;
         return response()->json([
             'status' => 'success',
-            'data' => $transactions
+            'data' => $transactions->load('outlet'),
         ], 200);
     }
     public function getOrder(Request $request)
@@ -212,7 +212,7 @@ class ApiController extends Controller
         }
         return response()->json([
             'status' => 'success',
-            'data' => $transaction,
+            'data' => $transaction->load('outlet', 'orders.menu'),
         ], 200);
     }
 }
